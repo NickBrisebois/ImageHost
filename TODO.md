@@ -1,8 +1,8 @@
 Simple Pomf-like image host.
 
 
-- [ ] Basic Upload
-- [ ] File Restrictions
+- [x] Basic Upload
+- [x] File Restrictions
 - [ ] Basic Layout
 - [ ] Provides link when completed.
 - [ ] Drag And Drop upload
