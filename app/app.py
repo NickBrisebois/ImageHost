@@ -5,7 +5,7 @@ from werkzeug import secure_filename
 from app.models import *
 
 app = Flask(__name__)
-
+app.secret_key = 'notactuallysecret'
 # Set the folder for uploads
 ext = set(['png', 'jpg', 'jpeg', 'webp', 'bmp', 'gif'])
 
@@ -15,9 +15,10 @@ def upload_file():
         f = request.files['fileToUpload']
         if f.filename.rsplit('.', 1)[1] in ext:
             f.save('./uploads/' + secure_filename(f.filename))
-            return "Uploaded"
+            flash('It has been uploaded')
         else:
-            return "Not right ext"
+            flash('It needs to be an image!')
+        return render_template('index.html')
 
 
 @app.route('/')
