@@ -2,6 +2,7 @@
 
 from flask import Flask, url_for, render_template, request, redirect, abort, session, g, flash
 from werkzeug import secure_filename
+import uuid
 from app.models import *
 
 app = Flask(__name__)
@@ -14,7 +15,7 @@ def upload_file():
     if request.method == 'POST':
         f = request.files['fileToUpload']
         if f.filename.rsplit('.', 1)[1] in ext:
-            f.save('./uploads/' + secure_filename(f.filename))
+            f.save('./uploads/' + uuid.uuid4().hex+'.'+f.filename.rsplit('.', 1)[1])
             flash('It has been uploaded')
         else:
             flash('It needs to be an image!')
