@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 
-from flask import Flask, url_for, render_template, request, redirect, abort, session, g, flash
+from flask import Flask, url_for, render_template, request, redirect, abort, session, g, flash, send_from_directory
 from werkzeug import secure_filename
 import uuid
-from app.models import *
 
 app = Flask(__name__)
 app.secret_key = 'notactuallysecret'
@@ -15,8 +14,9 @@ def upload_file():
     if request.method == 'POST':
         f = request.files['fileToUpload']
         if f.filename.rsplit('.', 1)[1] in ext:
-            f.save('./uploads/' + uuid.uuid4().hex+'.'+f.filename.rsplit('.', 1)[1])
-            flash('It has been uploaded')
+            named = uuid.uuid4().hex+'.'+f.filename.rsplit('.', 1)[1]
+            f.save('./uploads/' + named)
+            flash('It has been uploaded: '+request.url_root+'uploads/'+named)
         else:
             flash('It needs to be an image!')
         return render_template('index.html')
@@ -29,3 +29,10 @@ def index():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+@app.route('/uploads/<path:path>')
+def send_js(path):
+    return send_from_directory('uploads', path)
+
+if __name__ == "__main__":
+    app.run(port=8080, debug=True, threaded=True)
