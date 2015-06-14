@@ -6,6 +6,7 @@ import uuid
 
 app = Flask(__name__)
 app.secret_key = 'notactuallysecret'
+app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024
 # Set the folder for uploads
 ext = set(['png', 'jpg', 'jpeg', 'webp', 'bmp', 'gif'])
 
@@ -14,7 +15,7 @@ def upload_file():
     if request.method == 'POST':
         f = request.files['fileToUpload']
         if f.filename.rsplit('.', 1)[1] in ext:
-            named = uuid.uuid4().hex+'.'+f.filename.rsplit('.', 1)[1]
+            named = uuid.uuid4().hex+'.'+secure_filename(f.filename.rsplit('.', 1)[1])
             f.save('./uploads/' + named)
             flash('It has been uploaded: '+request.url_root+'uploads/'+named)
         else:
