@@ -1,3 +1,6 @@
 #wrapper{
    text-align: center;
 }
+body {
+    background-image: url("grunge_wall.png");
+}
