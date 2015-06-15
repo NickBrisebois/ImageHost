@@ -1,9 +1,12 @@
-<html>
-	<body>
+{% extends "base.html" %}
+
+{% block title %}Upload!{% endblock %}
+{% block body %}
+
 
 		<form action="/upload" method="post" enctype="multipart/form-data">
     		Select image to upload:
-    		<input type="file" name="fileToUpload" id="fileToUpload">
+    		<input type="file" name="fileToUpload" id="fileToUpload"><br />
     		<input type="submit" value="Upload Image" name="submit">
 		</form>
         {% with messages = get_flashed_messages() %}
@@ -15,5 +18,4 @@
                 </ul>
             {% endif %}
         {% endwith %}
-	</body>
-</html>
+{% endblock %}
