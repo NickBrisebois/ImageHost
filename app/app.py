@@ -11,16 +11,17 @@ app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024
 ext = set(['png', 'jpg', 'jpeg', 'webp', 'bmp', 'gif'])
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/upload', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
-        f = request.files['fileToUpload']
-        if f.filename.rsplit('.', 1)[1] in ext:
-            named = uuid.uuid4().hex+'.'+secure_filename(f.filename.rsplit('.', 1)[1])
-            f.save('./uploads/' + named)
-            flash('It has been uploaded: '+request.url_root+'uploads/'+named)
-        else:
-            flash('It needs to be an image!')
+        flist = request.files.getlist("file[]")
+        for f in flist:
+            if f.filename.rsplit('.', 1)[1] in ext:
+                named = uuid.uuid4().hex+'.'+secure_filename(f.filename.rsplit('.', 1)[1])
+                f.save('./uploads/' + named)
+                flash('It has been uploaded: '+request.url_root+'uploads/'+named)
+            else:
+                flash('It needs to be an image!')
         return render_template('index.html')
 
 
