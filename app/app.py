@@ -10,9 +10,8 @@ app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024
 # Set the folder for uploads
 ext = set(['png', 'jpg', 'jpeg', 'webp', 'bmp', 'gif'])
 
-
-@app.route('/upload', methods=['POST'])
-def upload_file():
+@app.route('/', methods=['GET', 'POST'])
+def index():
     if request.method == 'POST':
         flist = request.files.getlist("file[]")
         for f in flist:
@@ -22,11 +21,6 @@ def upload_file():
                 flash('It has been uploaded: '+request.url_root+'uploads/'+named)
             else:
                 flash('It needs to be an image!')
-        return render_template('index.html')
-
-
-@app.route('/')
-def index():
     return render_template('index.html')
     
 @app.errorhandler(404)

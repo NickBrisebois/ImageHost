@@ -4,10 +4,14 @@
 {% block body %}
 
         <i class="fa fa-file-image-o" style="font-size:15em"></i><br /><br />
-		<form action="/upload" method="post" enctype="multipart/form-data">
+		<form action="" method="post" enctype="multipart/form-data">
     		<b>Select image(s) to upload</b><br />
-    		<input type="file" multiple="" name="file[]"><br />
-    		<input type="submit" value="Upload Image(s)" name="submit">
+            <div class="fileUpload button bg-gray m1">
+                <span>Select Files...</span>
+                <input type="file" multiple="" name="file[]" class="upload">
+            </div><br/>
+
+    		<input type="submit" value="Upload Image(s)" name="submit" class="button m1">
 		</form>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
