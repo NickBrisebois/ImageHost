@@ -13,13 +13,13 @@
 
     		<input type="submit" value="Upload Image(s)" name="submit" class="button m1">
 		</form>
-        {% with messages = get_flashed_messages() %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-                <ul class=flashes>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
+                {% for category, message in messages %}
+                    <div class="bold center p2 white bg-{{ category }} rounded m1" style="display: inline-block;">
+                        {{ message }}
+                    </div><br/>
                 {% endfor %}
-                </ul>
             {% endif %}
         {% endwith %}
 {% endblock %}

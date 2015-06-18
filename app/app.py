@@ -18,9 +18,9 @@ def index():
             if f.filename.rsplit('.', 1)[1] in ext:
                 named = uuid.uuid4().hex+'.'+secure_filename(f.filename.rsplit('.', 1)[1])
                 f.save('./uploads/' + named)
-                flash('It has been uploaded: '+request.url_root+'uploads/'+named)
+                flash('It has been uploaded: '+request.url_root+'uploads/'+named, "green")
             else:
-                flash('It needs to be an image!')
+                flash('It needs to be an image!', 'red')
     return render_template('index.html')
     
 @app.errorhandler(404)
