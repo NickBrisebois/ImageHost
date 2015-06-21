@@ -13,9 +13,9 @@ function getFiles (files) {
 
     // Present file info and append it to the list of files#
     if( ext.indexOf(file.name.split('.').pop()) > -1 ){
-        div.innerHTML = "<div class='bold center p2 mb2 bg-yellow rounded' style='display: inline-block;'>"+file.name +" <span class='inline-block px1 white bg-green rounded'>Yes!</span></div> ";
+        div.innerHTML = "<div class='bold center p2 mb2 bg-yellow rounded' style='display: inline-block;'>"+file.name +" <span class='inline-block px1 white bg-green rounded'><i class='fa fa-check'></i></span></div> ";
     }else{
-        div.innerHTML = "<div class='bold center p2 mb2 bg-yellow rounded' style='display: inline-block;'>"+file.name +" <span class='inline-block px1 white bg-red rounded'>No!</span></div>";
+        div.innerHTML = "<div class='bold center p2 mb2 bg-yellow rounded' style='display: inline-block;'>"+file.name +" <span class='inline-block px1 white bg-red rounded'><i class='fa fa-close'></i></span></div>";
     }
 
     fileList.appendChild(div);
