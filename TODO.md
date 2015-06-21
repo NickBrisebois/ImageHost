@@ -10,6 +10,6 @@ Simple Pomf-like image host.
 - [x] Randomly generated image names
 - [ ] Set upload folder to not execute just in case
 - [x] Set upload limit (?)
-- [ ] Multi Upload capability
+- [x] Multi Upload capability
 - [ ] Image Collections
 - [ ] Ability for user to convert format (maybe just to webp for now)
