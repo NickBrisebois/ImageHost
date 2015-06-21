@@ -42,4 +42,6 @@ if __name__ == "__main__":
     handler = RotatingFileHandler('logging.log', maxBytes=10000, backupCount=1)
     handler.setLevel(logging.INFO)
     app.logger.addHandler(handler)
+    fmt = logging.Formatter("%(asctime)-15s %(message)s",datefmt='%Y-%m-%d')
+    handler.setFormatter(fmt)
     app.run(port=80, debug=True, threaded=True, host='0.0.0.0')
