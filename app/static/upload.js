@@ -1,4 +1,4 @@
-(function () {
+
 var filesUpload = document.getElementById("file");
 var fileList = document.getElementById("file-list");
 var ext = ['png', 'jpg', 'jpeg', 'webp', 'bmp', 'gif'];
@@ -27,4 +27,11 @@ filesUpload.addEventListener("change", function () {
     getFiles(this.files);
 }, false);
 });
-     })();
+function getCount(){
+nanoajax.ajax('/api/count', function (code, responseText) { 
+    document.getElementById("count").innerHTML=responseText;
+    })
+console.log("Fired!")
+}
+getCount()
+setInterval(getCount, 5000);

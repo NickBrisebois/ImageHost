@@ -2,7 +2,7 @@
 
 from flask import Flask, url_for, render_template, request, redirect, abort, session, g, flash, send_from_directory
 from werkzeug import secure_filename
-import uuid, logging, imghdr
+import uuid, logging, imghdr, os.path
 from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
@@ -38,6 +38,11 @@ def page_not_found(e):
 def send_js(path):
     app.logger.info("retrieving file: "+path)
     return send_from_directory('uploads', path)
+
+@app.route('/api/count')
+def api_count(): #just basic before a DB is implemented.
+    path = './uploads'
+    return str(len([f for f in os.listdir(path)if os.path.isfile(os.path.join(path, f))]))
 
 if __name__ == "__main__":
     handler = RotatingFileHandler('logging.log', maxBytes=10000, backupCount=1)
