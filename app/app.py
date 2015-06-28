@@ -2,8 +2,7 @@
 
 from flask import Flask, url_for, render_template, request, redirect, abort, session, g, flash, send_from_directory
 from werkzeug import secure_filename
-import uuid
-import logging
+import uuid, logging, imghdr
 from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
@@ -11,6 +10,8 @@ app.secret_key = 'notactuallysecret'
 app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024
 # Set the folder for uploads
 ext = set(['png', 'jpg', 'jpeg', 'webp', 'bmp', 'gif'])
+def validImage(img):
+     return img.filename.rsplit('.', 1)[1] in ext and imghdr.what(img) in ext
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -18,7 +19,7 @@ def index():
         flist = request.files.getlist("file[]")
         for f in flist:
             app.logger.info("attempted image upload: "+f.filename)
-            if f.filename.rsplit('.', 1)[1] in ext:
+            if validImage(f):
                 named = uuid.uuid4().hex+'.'+secure_filename(f.filename.rsplit('.', 1)[1])
                 f.save('./uploads/' + named)
                 app.logger.info("image uploaded: "+f.filename+" as "+named)

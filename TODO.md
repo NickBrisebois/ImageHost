@@ -3,7 +3,7 @@ Simple Pomf-like image host.
 
 - [x] Basic Upload
 - [x] File Restrictions
-- [ ] Basic Layout
+- [x] Basic Layout
 - [x] Provides link when completed.
 - [ ] Drag And Drop upload
 - [ ] Threaded upload with progressbar (required for drag and drop)
@@ -16,3 +16,4 @@ Simple Pomf-like image host.
 - [ ] Ability for user to convert format (maybe just to webp for now)
 - [ ] Ajax it!
 - [ ] Implement databases
+- [ ] More thorough checking of image files.
