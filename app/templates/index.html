@@ -3,29 +3,31 @@
 {% block title %}Upload!{% endblock %}
 {% block body %}
 
-        <i class="fa fa-file-image-o" style="font-size:15em"></i><br /><br />
-		<form action="" method="post" enctype="multipart/form-data">
-    		<b>Select image(s) to upload</b><br />
-            <div class="fileUpload button bg-gray m1">
-                <span>Select Files...</span>
-                <input type="file" multiple="" name="file[]" id="file" class="upload">
-            </div><br/>
-        <div id="file-list">
-            
-        </div>
-    		<input type="submit" value="Upload Image(s)" name="submit" class="button m1">
-		</form>
+        <div id="uploadBox">
 
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="bold center p2 white bg-{{ category }} rounded m1" style="display: inline-block;">
-                        {{ message }}
-                    </div><br/>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        <h1 id="count"></h1>
-        <h3>Images uploaded so far!</h3>
+            <h1>Image Host</h1>
+
+    		<form action="" method="post" enctype="multipart/form-data">
+        		<b>Select image(s) to upload</b>
+                <div class="fileUpload">
+                    <span>Select Files...</span>
+                    <input type="file" multiple="" name="file[]" id="file" class="upload">
+                </div>
+        		<input type="submit" value="Upload Image(s)" name="submit" class="button m1">
+    		</form>
+        </div>
+
+        <div id="uploadsList">
+            <div id="file-list"></div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="bold center p2 white bg-{{ category }} rounded m1" style="display: inline-block;">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
 
 {% endblock %}
