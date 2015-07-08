@@ -31,6 +31,7 @@ function getFiles (files) {
     }else{
         div.innerHTML = "<div class='bold center p2 mb2 bg-yellow rounded' style='display: inline-block;' id = "+file.name.hashCode()+"><span id='span"+file.name.hashCode()+"'>"+file.name+"</span> <span class='inline-block px1 white bg-red rounded'><i class='fa fa-close'></i></span> </div>";
     }
+    //maybe i should dynamically put this stuff in an array, probably much easier
 
     fileList.appendChild(div);
         }
