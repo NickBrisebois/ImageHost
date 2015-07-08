@@ -75,6 +75,3 @@ target/
 
 # sftp configuration file
 sftp-config.json
-
-imagehostenv/
-imagehost.ini

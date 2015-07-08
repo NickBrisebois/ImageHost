@@ -2,16 +2,16 @@
 
 from flask import Flask, url_for, render_template, request, redirect, abort, session, g, flash, send_from_directory
 from werkzeug import secure_filename
-import uuid, logging, imghdr, os.path
+import uuid, logging, imghdr, os.path, shutil
 from logging.handlers import RotatingFileHandler
-
+from PIL import Image
 app = Flask(__name__)
 app.secret_key = 'notactuallysecret'
 app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024
 # Set the folder for uploads
-ext = set(['png', 'jpg', 'jpeg', 'webp', 'bmp', 'gif'])
+ext = set(['png', 'jpg', 'jpeg', 'bmp', 'gif'])
 def validImage(img):
-     return img.filename.rsplit('.', 1)[1] in ext and imghdr.what(img) in ext
+    return img.filename.rsplit('.', 1)[1] in ext and imghdr.what(img) in ext #recommend removing imghdr
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -44,10 +44,30 @@ def api_count(): #just basic before a DB is implemented.
     path = './uploads'
     return str(len([f for f in os.listdir(path)if os.path.isfile(os.path.join(path, f))]))
 
+@app.route('/api/upload', methods=['POST'])
+def api_upload():
+    if request.method == 'POST':
+        #app.logger.info("Api Request")
+        flist = request.files.getlist("file[]")
+        app.logger.info(str(len(flist)))
+        for f in flist:
+            app.logger.info("attempted image upload: "+f.filename)
+            if validImage(f):
+                named = uuid.uuid4().hex+'.'+secure_filename(f.filename.rsplit('.', 1)[1])
+                f.save('./uploads/' + named)
+                app.logger.info("image uploaded: "+f.filename+" as "+named)
+                return request.url_root+'uploads/'+named
+            else:
+                app.logger.info("Tried uploading invalid file: "+f.filename)
+                return "Invalid File"
+    else:
+        return "Unexpected Failure"
+    return "This failure should not happen"+request.method
+
 if __name__ == "__main__":
-    handler = RotatingFileHandler('logging.log', maxBytes=10000, backupCount=1)
+    handler = RotatingFileHandler('logging.log', maxBytes=100000, backupCount=1)
     handler.setLevel(logging.INFO)
     app.logger.addHandler(handler)
     fmt = logging.Formatter("%(asctime)-15s %(message)s",datefmt='%Y-%m-%d')
     handler.setFormatter(fmt)
-    app.run(port=80, debug=True, threaded=True, host='0.0.0.0')
+    app.run(port=8080, debug=True, threaded=True, host='0.0.0.0')
