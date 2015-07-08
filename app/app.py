@@ -2,9 +2,8 @@
 
 from flask import Flask, url_for, render_template, request, redirect, abort, session, g, flash, send_from_directory
 from werkzeug import secure_filename
-import uuid, logging, imghdr, os.path, shutil
+import uuid, logging, os.path, shutil
 from logging.handlers import RotatingFileHandler
-from PIL import Image
 app = Flask(__name__)
 app.secret_key = 'notactuallysecret'
 app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024
