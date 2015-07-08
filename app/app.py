@@ -11,7 +11,7 @@ app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024
 # Set the folder for uploads
 ext = set(['png', 'jpg', 'jpeg', 'bmp', 'gif'])
 def validImage(img):
-    return img.filename.rsplit('.', 1)[1] in ext and imghdr.what(img) in ext #recommend removing imghdr
+    return img.filename.rsplit('.', 1)[1] in ext
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -44,7 +44,7 @@ def api_count(): #just basic before a DB is implemented.
     path = './uploads'
     return str(len([f for f in os.listdir(path)if os.path.isfile(os.path.join(path, f))]))
 
-@app.route('/api/upload', methods=['POST'])
+@app.route('/api/upload', methods=['POST']) ##response should be json in future.
 def api_upload():
     if request.method == 'POST':
         #app.logger.info("Api Request")
@@ -58,11 +58,11 @@ def api_upload():
                 app.logger.info("image uploaded: "+f.filename+" as "+named)
                 return request.url_root+'uploads/'+named
             else:
-                app.logger.info("Tried uploading invalid file: "+f.filename)
-                return "Invalid File"
+                app.logger.info("Fail: Tried uploading invalid file: "+f.filename)
+                return "Fail: Invalid File"
     else:
-        return "Unexpected Failure"
-    return "This failure should not happen"+request.method
+        return "Fail: Unexpected Failure"
+    return "Fail: This failure should not happen"+request.method
 
 if __name__ == "__main__":
     handler = RotatingFileHandler('logging.log', maxBytes=100000, backupCount=1)
