@@ -26,7 +26,7 @@ function getFiles (files) {
     li.appendChild(div);
 
     // Present file info and append it to the list of files#
-    if( ext.indexOf(file.name.split('.').pop()) > -1 ){
+    if( ext.indexOf(file.name.lower().split('.').pop()) > -1 ){
         div.innerHTML = "<div class='bold center p2 mb2 bg-yellow rounded' style='display: inline-block;' id = "+file.name.hashCode()+"><span id='span"+file.name.hashCode()+"'>"+file.name+"</span> <span class='inline-block px1 white bg-green rounded'><i class='fa fa-check'></i></span> </div> ";
     }else{
         div.innerHTML = "<div class='bold center p2 mb2 bg-yellow rounded' style='display: inline-block;' id = "+file.name.hashCode()+"><span id='span"+file.name.hashCode()+"'>"+file.name+"</span> <span class='inline-block px1 white bg-red rounded'><i class='fa fa-close'></i></span> </div>";
@@ -54,6 +54,8 @@ filesUpload.addEventListener("change", function () {
 }, false);
 
 form.onsubmit = function(event) {
+    //on submit, should disable upload button (and maybe rename)
+    //put spinning thing on each div or something.
     event.preventDefault();
     var files = filesUpload.files;
     

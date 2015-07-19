@@ -10,7 +10,7 @@ app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024
 # Set the folder for uploads
 ext = set(['png', 'jpg', 'jpeg', 'bmp', 'gif'])
 def validImage(img):
-    return img.filename.rsplit('.', 1)[1] in ext
+    return img.filename.rsplit('.', 1)[1].lower() in ext
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
