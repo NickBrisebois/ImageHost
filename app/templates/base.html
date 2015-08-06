@@ -3,8 +3,8 @@
         <title>{% block title %}{% endblock %}</title>
         <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dropzone.min.css') }}" />
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-		<script src="{{ url_for('static', filename='dropzone.min.js') }}"></script>
     </head>
 
     <body>
@@ -28,6 +28,6 @@
 		</div>
     </body>
     <script type="text/javascript" src="{{ url_for('static', filename='nanoAJAX.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='dropzone.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='upload.js') }}"></script>
-
 </html>

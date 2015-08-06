@@ -7,17 +7,16 @@
 
 		<div id="upload-form">
 
-			<form id="file-form" class="dropzone" action="/api/upload" method="POST">
-				<label for="file" class="upload-label">
-					<p class="upload-button">Upload</p>
-				</label>
-				<input type="file" multiple="" name="file" id="file" class="upload-button">
-				<input type="submit" value="Upload Image(s)" name="uploadBtn" id="uploadBtn" class="button m1">
-			</form>
+			<form id="file-form" class="dropzone" action="/api/upload" method="POST"></form>
+
 		</div>
 
+		<button id="submit-all">Upload Files</button>
+
 		<div id="upload-information">
+
 			<div id="file-list">
+				<h4>Uploaded files appear here</h4>
 			</div>
 
 			{% with messages = get_flashed_messages(with_categories=true) %}

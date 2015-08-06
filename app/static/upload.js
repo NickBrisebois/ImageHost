@@ -2,7 +2,7 @@
 var filesUpload = document.getElementById("file");
 var fileList = document.getElementById("file-list");
 var submit = document.getElementById("uploadBtn")
-var form = document.getElementById('file-form');
+var form = document.getElementById('fileForm');
 var ext = ['png', 'jpg', 'jpeg', 'webp', 'bmp', 'gif'];
 
 
@@ -43,35 +43,37 @@ filesUpload.addEventListener("change", function () {
 }, false);
 
 
-form.onsubmit = function(event) {
-    //on submit, should disable upload button (and maybe rename)
-    //put spinning thing on each div or something.
-    event.preventDefault();
-    var files = filesUpload.files;
-    
-    for(var i = 0;i<files.length;i++){
-        var formData = new FormData();
-        var file = files[i];
-        formData.append('file[]', file, file.name);
-        // maybe do each upload seperately. Chain success together.
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/upload', true);
-        (function(file){
-        xhr.onload = function () { //onreadystatechange replacement.
+//When the user hits the upload files button, start the upload by calling on the flask upload script in app.py at /api/upload
+Dropzone.options.fileForm = {
 
-            if (this.status === 200 && !this.responseText.includes("Fail")) { // in future, this really should be JSON
-                //change contents of the image selection divs somehow to reflect: uploading, uploaded or failed.
-                document.getElementById(file.name.hashCode()).innerHTML=document.getElementById(file.name.hashCode()).innerHTML+"<span class='inline-block px1 white bg-green rounded'><i class='fa fa-check'></i></span>"
-                document.getElementById("span"+file.name.hashCode()).innerHTML="<a href='"+this.responseText+"'>"+file.name+"</a>"
-                console.log(this.responseText);
-            } else {
-                document.getElementById(file.name.hashCode()).innerHTML=document.getElementById(file.name.hashCode()).innerHTML+"<span class='inline-block px1 white bg-red rounded'><i class='fa fa-close'></i></span>"
-                console.log('An error occurred! '+this.status);
-            }
-            //no matter what, continue onto next file anyway. Though depending on error (too many uploads?) break it.
-        };
-        })(file);
-    xhr.send(formData);
-}
+	acceptedFiles: "image/*",
 
-}
+	init: function() {
+		var submitButton = document.querySelector("#submit-all")
+			myDropzone = this;
+
+		submitButton.addEventListener("click", function(event) {
+			event.preventDefault();
+			var files = myDropzone.getAcceptedFiles();
+			for(var i = 0; i<files.length; i++) {
+				var formData = new FormData();
+				var file = files[i];
+				formData.append('file[]', file, file.name);
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', '/api/upload', true);
+				(function(file){
+					xhr.onload = function () { //onreadystatechange replacement.
+						if (this.status === 200 && !this.responseText.includes("Fail")) { // in future, this really should be JSON
+							//change contents of the image selection divs somehow to reflect: uploading, uploaded or failed.
+							console.log(this.responseText);
+						} else {
+							alert("Failed");
+						}
+					};
+				})(file);
+				xhr.send(formData);
+			}
+		});
+	}
+};
+

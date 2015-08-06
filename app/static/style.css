@@ -2,7 +2,9 @@
 
 html,body {
     background-image: url("images/light_toast.png");
+	font-family: 'Open Sans', sans-serif;
 	margin: 0;
+	color: #555;
 }
 
 #container {
@@ -69,6 +71,7 @@ html,body {
 	padding: 10px;
 	margin-left: 10px;
 	font-weight: bold;
+	border-radius: 3px;
 	text-decoration: none;
 	border: 2px solid #555;
 }
@@ -86,21 +89,39 @@ html,body {
 	border: 3px dashed #555;
 }
 
-#upload-form .upload-button {
-	padding: 5px;
-	border: 2px solid #555;
-	width: 50px;
+#file-form {
+	max-height: 50%;
+	background-color: #eee;
+	font-weight: bold;
+	border: none;
 }
 
-#upload-form input[type="file"] {
-	display: none;
+#upload-form .dz-default {
+	padding: 20px;
+	color: #555;
+}
+
+#submit-all {
+	background-color: #CBC9B7;
+	border: 2px solid #555;
+	padding: 15px;
+	margin: 0 0 10px 0;
+	float: right;
+	font-weight: bold;
+	width: 51%;
+}
+
+#submit-all:hover {
+	text-decoration: none;
+	background-color: #BEC5B7;
+	box-shadow: 0px 0px 1px 0px #999;
 }
 
 #upload-information {
 	width: 50%;
 	float: right;
 	margin: 0 auto;
-	border: 2px dashed #555;
+	border: 3px solid #555;
 	background-color: #eee;
 }
 
