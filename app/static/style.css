@@ -1,15 +1,28 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+html,body {
+    background-image: url("images/light_toast.png");
+	margin: 0;
+}
+
+#container {
+	width: 500px;
+	margin: 0 auto;
+	padding-top: 30px;
+	height: 30px;
+}
+
 #wrapper{
    text-align: center;
    margin-top: 10px;
 }
-body {
-    background-image: url("cubes.png");
-}
+
 .fileUpload {
     position: relative;
     overflow: hidden;
     margin: 10px;
 }
+
 .fileUpload input.upload {
     position: absolute;
     top: 0;
@@ -21,3 +34,73 @@ body {
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
+#topbar {
+	top: 0;
+	height: 100px;
+	width: 100%;
+	color: #555;
+}
+
+#topbar * {
+	margin-top: 0;
+}
+
+#topbar h1 {
+	float: left;
+	font-family: 'Open Sans', sans-serif;
+}
+
+#nav {
+	line-height: 3;
+}
+
+#nav ul {
+	width: 50%;
+	float: right;	
+}
+
+#nav ul li {
+	display: inline;
+}
+
+#nav ul li a{
+	color: #555;
+	padding: 10px;
+	margin-left: 10px;
+	font-weight: bold;
+	text-decoration: none;
+	border: 2px solid #555;
+}
+
+#nav ul li a:hover {
+	text-decoration: none;
+	background-color: #eee;
+	box-shadow: 0px 0px 1px 0px #999;
+}
+
+#upload-form {
+	width: 45%;
+	float: left;
+	background-color: #eee;
+	border: 3px dashed #555;
+}
+
+#upload-form .upload-button {
+	padding: 5px;
+	border: 2px solid #555;
+	width: 50px;
+}
+
+#upload-form input[type="file"] {
+	display: none;
+}
+
+#upload-information {
+	width: 50%;
+	float: right;
+	margin: 0 auto;
+	border: 2px dashed #555;
+	background-color: #eee;
+}
+

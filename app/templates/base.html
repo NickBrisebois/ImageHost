@@ -1,18 +1,31 @@
 <!DOCTYPE html>
     <head>
         <title>{% block title %}{% endblock %}</title>
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
-
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-		<link href="http://d2v52k3cl9vedd.cloudfront.net/basscss/6.1.6/basscss.min.css" rel="stylesheet">
+		<script src="{{ url_for('static', filename='dropzone.min.js') }}"></script>
     </head>
 
     <body>
-	<div id = "wrapper">
-            {% block body %}
-            {% endblock %}
-        </div>
+
+		<div id="topbar">
+			<div id="container">
+				<h1>Image Host</h1>
+				<div id="nav">
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/">Popular Uploads</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	
+
+		<div id = "wrapper">
+			{% block body %}
+			{% endblock %}
+		</div>
     </body>
     <script type="text/javascript" src="{{ url_for('static', filename='nanoAJAX.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='upload.js') }}"></script>

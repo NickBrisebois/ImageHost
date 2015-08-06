@@ -3,29 +3,33 @@
 {% block title %}Upload!{% endblock %}
 {% block body %}
 
-        <i class="fa fa-file-image-o" style="font-size:15em"></i><br /><br />
-    		<b>Select image(s) to upload</b><br />
-            <div class="fileUpload button bg-gray m1">
-                <span>Select Files...</span>
-                <form id="file-form" action="/api/upload" method="POST">
-                <input type="file" multiple="" name="file" id="file" class="upload">
-            </div><br/>
-        <div id="file-list">
-            
-        </div>
-    		<input type="submit" value="Upload Image(s)" name="uploadBtn" id="uploadBtn" class="button m1">
-            </form>
+	<div id="container">
 
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="bold center p2 white bg-{{ category }} rounded m1" style="display: inline-block;">
-                        {{ message }}
-                    </div><br/>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        <h1 id="count"></h1>
-        <h3>Images uploaded so far!</h3>
+		<div id="upload-form">
 
+			<form id="file-form" class="dropzone" action="/api/upload" method="POST">
+				<label for="file" class="upload-label">
+					<p class="upload-button">Upload</p>
+				</label>
+				<input type="file" multiple="" name="file" id="file" class="upload-button">
+				<input type="submit" value="Upload Image(s)" name="uploadBtn" id="uploadBtn" class="button m1">
+			</form>
+		</div>
+
+		<div id="upload-information">
+			<div id="file-list">
+			</div>
+
+			{% with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+					{% for category, message in messages %}
+						<div class="bold center p2 white bg-{{ category }} rounded m1" style="display: inline-block;">
+							{{ message }}
+						</div><br/>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+		</div>
+
+	</div>
 {% endblock %}

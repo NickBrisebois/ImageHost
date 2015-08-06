@@ -5,6 +5,7 @@ var submit = document.getElementById("uploadBtn")
 var form = document.getElementById('file-form');
 var ext = ['png', 'jpg', 'jpeg', 'webp', 'bmp', 'gif'];
 
+
 String.prototype.hashCode = function() {
   var hash = 0, i, chr, len;
   if (this.length == 0) return hash;
@@ -16,42 +17,31 @@ String.prototype.hashCode = function() {
   return hash;
 };
 
+
 function getFiles (files) {
+	//Function gets file list and returns information on whether or not the file successfully uploaded 
     if (typeof files !== undefined) {
         for (var i=0, l=files.length; i<l; i++) {
-            var file = files[i]
-              var li = document.createElement("li"),
-        div = document.createElement("div");
-
-    li.appendChild(div);
-
-    // Present file info and append it to the list of files#
-    if( ext.indexOf(file.name.lower().split('.').pop()) > -1 ){
-        div.innerHTML = "<div class='bold center p2 mb2 bg-yellow rounded' style='display: inline-block;' id = "+file.name.hashCode()+"><span id='span"+file.name.hashCode()+"'>"+file.name+"</span> <span class='inline-block px1 white bg-green rounded'><i class='fa fa-check'></i></span> </div> ";
-    }else{
-        div.innerHTML = "<div class='bold center p2 mb2 bg-yellow rounded' style='display: inline-block;' id = "+file.name.hashCode()+"><span id='span"+file.name.hashCode()+"'>"+file.name+"</span> <span class='inline-block px1 white bg-red rounded'><i class='fa fa-close'></i></span> </div>";
-    }
-    //maybe i should dynamically put this stuff in an array, probably much easier
-
-    fileList.appendChild(div);
-        }
-    }
+            var file = files[i];
+			// Present file info and append it to the list of files#
+			if( ext.indexOf(file.name.toLowerCase().split('.').pop()) > -1 ){
+				return file.name + " : ready to upload";
+			}else{
+				return file.name + " : cannot be uploaded";
+			}
+		}
+	}
 }
 
-
-function getCount(){
-    nanoajax.ajax('/api/count', function (code, responseText) { 
-        document.getElementById("count").innerHTML=responseText;
-    })
-    console.log("Fired!")
-}
-getCount()
-setInterval(getCount, 60000);
 
 filesUpload.addEventListener("change", function () {
-    fileList.innerHTML="";
-    getFiles(this.files);
+	//After choosing an image, let the user know if it's ready to be uploaded
+	var message = document.createElement("span");
+	message.setAttribute("id", "message");
+	message.innerHTML = getFiles(this.files);
+	fileList.appendChild(message);
 }, false);
+
 
 form.onsubmit = function(event) {
     //on submit, should disable upload button (and maybe rename)
