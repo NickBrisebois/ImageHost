@@ -18,35 +18,11 @@ String.prototype.hashCode = function() {
 };
 
 
-function getFiles (files) {
-	//Function gets file list and returns information on whether or not the file successfully uploaded 
-    if (typeof files !== undefined) {
-        for (var i=0, l=files.length; i<l; i++) {
-            var file = files[i];
-			// Present file info and append it to the list of files#
-			if( ext.indexOf(file.name.toLowerCase().split('.').pop()) > -1 ){
-				return file.name + " : ready to upload";
-			}else{
-				return file.name + " : cannot be uploaded";
-			}
-		}
-	}
-}
-
-
-filesUpload.addEventListener("change", function () {
-	//After choosing an image, let the user know if it's ready to be uploaded
-	var message = document.createElement("span");
-	message.setAttribute("id", "message");
-	message.innerHTML = getFiles(this.files);
-	fileList.appendChild(message);
-}, false);
-
-
 //When the user hits the upload files button, start the upload by calling on the flask upload script in app.py at /api/upload
 Dropzone.options.fileForm = {
 
 	acceptedFiles: "image/*",
+	previewsContainer: "#file-list",
 
 	init: function() {
 		var submitButton = document.querySelector("#submit-all")

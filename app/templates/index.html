@@ -7,7 +7,11 @@
 
 		<div id="upload-form">
 
-			<form id="file-form" class="dropzone" action="/api/upload" method="POST"></form>
+			<form id="file-form" class="dropzone" action="/api/upload" method="POST">
+				<div class="dz-message" data-dz-message>
+					<span>Drag images or click here to upload</span>
+				</div>
+			</form>
 
 		</div>
 
@@ -15,8 +19,8 @@
 
 		<div id="upload-information">
 
-			<div id="file-list">
-				<h4>Uploaded files appear here</h4>
+			<div id="file-list" class="dropzone-previews">
+				<h4>Files Queued To Upload</h4>
 			</div>
 
 			{% with messages = get_flashed_messages(with_categories=true) %}

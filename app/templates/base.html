@@ -3,14 +3,13 @@
         <title>{% block title %}{% endblock %}</title>
         <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dropzone.min.css') }}" />
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     </head>
 
     <body>
 
 		<div id="topbar">
-			<div id="container">
+			<div id="header-container">
 				<h1>Image Host</h1>
 				<div id="nav">
 					<ul>
