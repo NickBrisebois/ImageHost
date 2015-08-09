@@ -22,16 +22,6 @@
 			<div id="file-list" class="dropzone-previews">
 				<h4>Files Queued To Upload</h4>
 			</div>
-
-			{% with messages = get_flashed_messages(with_categories=true) %}
-				{% if messages %}
-					{% for category, message in messages %}
-						<div class="bold center p2 white bg-{{ category }} rounded m1" style="display: inline-block;">
-							{{ message }}
-						</div><br/>
-					{% endfor %}
-				{% endif %}
-			{% endwith %}
 		</div>
 
 	</div>
