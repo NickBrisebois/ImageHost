@@ -14,20 +14,29 @@ ext = set(['png', 'jpg', 'jpeg', 'bmp', 'gif'])
 def validImage(img):
     return img.filename.rsplit('.', 1)[1].lower() in ext
 
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     app.logger.info("404 from user")
     return render_template('errors/404.html'), 404
+
 
 @app.route('/uploads/<path:path>')
 def send_js(path):
     app.logger.info("retrieving file: "+path)
     return send_from_directory('uploads', path)
 
+
 @app.route('/api/count')
 def api_count(): #just basic before a DB is implemented.
     path = './uploads'
     return str(len([f for f in os.listdir(path)if os.path.isfile(os.path.join(path, f))]))
+
 
 @app.route('/api/upload', methods=['POST']) ##response should be json in future.
 def api_upload():
@@ -48,6 +57,7 @@ def api_upload():
     else:
         return "Fail: Unexpected Failure"
     return "Fail: This failure should not happen"+request.method
+
 
 if __name__ == "__main__":
     handler = RotatingFileHandler('logging.log', maxBytes=100000, backupCount=1)
