@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-from flask import Flask, url_for, render_template, request, redirect, abort, session, g, flash, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, redirect
 from werkzeug import secure_filename
-import uuid, logging, os.path, shutil
+import uuid, logging, os.path
 from logging.handlers import RotatingFileHandler
 app = Flask(__name__)
 app.secret_key = 'notactuallysecret'
@@ -50,13 +50,17 @@ def api_upload():
                 named = uuid.uuid4().hex+'.'+secure_filename(f.filename.rsplit('.', 1)[1])
                 f.save('./uploads/' + named)
                 app.logger.info("image uploaded: "+f.filename+" as "+named)
-                return request.url_root+'uploads/'+named
+                return named
             else:
                 app.logger.info("Fail: Tried uploading invalid file: "+f.filename)
                 return "Fail: Invalid File"
     else:
         return "Fail: Unexpected Failure"
     return "Fail: This failure should not happen"+request.method
+
+@app.route('/images/<image>')
+def image_page(image):
+    return render_template('image.html', image=image)
 
 
 if __name__ == "__main__":

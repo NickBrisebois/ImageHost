@@ -41,7 +41,7 @@ Dropzone.options.fileForm = {
 					xhr.onload = function () { //onreadystatechange replacement.
 						if (this.status === 200 && !this.responseText.includes("Fail")) { // in future, this really should be JSON
 							//change contents of the image selection divs somehow to reflect: uploading, uploaded or failed.
-							console.log(this.responseText);
+							window.location.replace('/images/' + this.responseText); 
 						} else {
 							alert("Failed");
 						}

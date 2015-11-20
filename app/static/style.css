@@ -8,7 +8,7 @@ html,body {
 }
 
 #header-container {
-	width: 500px;
+	width: 535px;
 	margin: 0 auto;
 	padding-top: 30px;
 	height: 30px;
@@ -195,3 +195,21 @@ html,body {
 .dz-preview svg {
 	display: none;
 }
+
+/* 
+ * Image Page
+ * 
+ */
+
+#container.image {
+	width: 500px;
+	padding: 4px;
+}
+
+#container.image img {
+	border: 2px solid #511C12;
+}
+
+
+
+
